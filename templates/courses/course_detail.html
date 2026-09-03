@@ -1,0 +1,108 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+{{ course.title }} | The ZS-Tech
+
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+
+    <div class="mb-5">
+
+        <span class="badge bg-primary">
+
+            Python Full Stack
+
+        </span>
+
+
+        <h1 class="mt-3">
+
+            {{ course.title }}
+
+        </h1>
+
+
+        <p class="lead">
+
+            {{ course.description }}
+
+        </p>
+
+
+        <div>
+
+            <strong>
+                Duration:
+            </strong>
+
+            {{ course.duration }}
+
+        </div>
+
+    </div>
+
+
+
+    <h2>
+        Complete Learning Roadmap
+    </h2>
+
+
+    <div class="row g-4 mt-2">
+
+
+        {% for module in course.modules.all %}
+
+        <div class="col-md-6">
+
+            <div class="roadmap-card text-start">
+
+
+                <small class="text-primary">
+
+                    {{ module.get_category_display }}
+
+                </small>
+
+
+                <h4>
+
+                    {{ module.order }}.
+                    {{ module.title }}
+
+                </h4>
+
+
+                <p>
+
+                    {{ module.description }}
+
+                </p>
+
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <p>
+            Course modules will be added soon.
+        </p>
+
+        {% endfor %}
+
+
+    </div>
+
+
+</div>
+
+{% endblock %}

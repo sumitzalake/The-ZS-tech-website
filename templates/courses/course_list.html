@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Courses | The ZS-Tech
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="text-center mb-5">
+
+        <h1>
+            Our Courses
+        </h1>
+
+        <p>
+            Become a job-ready Python Full Stack Developer.
+        </p>
+
+    </div>
+
+
+    <div class="row g-4">
+
+
+        {% for course in courses %}
+
+        <div class="col-md-6">
+
+            <div class="card course-card h-100 p-4">
+
+
+                <span class="badge bg-primary mb-3">
+
+                    Python Full Stack
+
+                </span>
+
+
+                <h3>
+
+                    {{ course.title }}
+
+                </h3>
+
+
+                <p>
+
+                    {{ course.short_description }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Duration:
+                    </strong>
+
+                    {{ course.duration }}
+
+                </p>
+
+
+                <a
+                    href="{% url 'course_detail' course.id %}"
+                    class="btn btn-primary">
+
+                    View Course
+
+                </a>
+
+
+            </div>
+
+        </div>
+
+
+        {% empty %}
+
+        <div class="text-center">
+
+            <h4>
+                No courses available.
+            </h4>
+
+            <p>
+                Add a course from Django Admin.
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+{% endblock %}

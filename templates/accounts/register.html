@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Student Registration | The ZS-Tech
+{% endblock %}
+
+
+{% block content %}
+
+<div class="auth-container">
+
+    <div class="auth-card">
+
+        <h2>
+            Join The ZS-Tech
+        </h2>
+
+        <p>
+            Create your student account
+        </p>
+
+
+        <form method="POST">
+
+            {% csrf_token %}
+
+
+            {{ form.as_p }}
+
+
+            <button
+                type="submit"
+                class="btn btn-primary w-100">
+
+                Create Account
+
+            </button>
+
+        </form>
+
+
+        <p class="text-center mt-3">
+
+            Already have an account?
+
+            <a href="{% url 'login' %}">
+                Login
+            </a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

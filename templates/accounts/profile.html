@@ -1,0 +1,84 @@
+{% extends 'base.html' %}
+
+{% block title %}
+My Profile | The ZS-Tech
+{% endblock %}
+
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-lg-8">
+
+            <div class="card shadow-sm p-4">
+
+                <h2>
+                    My Profile
+                </h2>
+
+                <hr>
+
+
+                <h4>
+
+                    {{ user.first_name }}
+                    {{ user.last_name }}
+
+                </h4>
+
+
+                <p>
+
+                    <strong>
+                        Username:
+                    </strong>
+
+                    {{ user.username }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Email:
+                    </strong>
+
+                    {{ user.email }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Mobile:
+                    </strong>
+
+                    {{ user.studentprofile.mobile }}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Education:
+                    </strong>
+
+                    {{ user.studentprofile.education }}
+
+                </p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}
