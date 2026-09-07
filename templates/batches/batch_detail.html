@@ -1,0 +1,93 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ batch.name }} | The ZS-Tech{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        {% if batch.status == 'upcoming' %}
+        <span class="pill">{{ batch.get_status_display }}</span>
+        {% elif batch.status == 'ongoing' %}
+        <span class="pill pill-warn">{{ batch.get_status_display }}</span>
+        {% else %}
+        <span class="pill pill-muted">{{ batch.get_status_display }}</span>
+        {% endif %}
+
+        <h1 class="mt-3">{{ batch.name }}</h1>
+        <p class="lead mb-2">{{ batch.course.title }}</p>
+        <p style="max-width: 42rem;">{{ batch.description|default:"Join this cohort for structured training, live sessions, and project mentorship." }}</p>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-7">
+                <div class="soft-panel">
+                    <h2 class="h4 mb-3">Batch details</h2>
+                    <dl class="info-list row mb-0">
+                        <div class="col-sm-6">
+                            <dt>Start date</dt>
+                            <dd>{{ batch.start_date }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>End date</dt>
+                            <dd>{{ batch.end_date }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>Schedule</dt>
+                            <dd>{{ batch.schedule }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>Duration</dt>
+                            <dd>{{ batch.duration }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>Instructor</dt>
+                            <dd>{{ batch.instructor }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>Students</dt>
+                            <dd>{{ batch.students_count }}</dd>
+                        </div>
+                        <div class="col-sm-6">
+                            <dt>Course fee</dt>
+                            <dd class="fee-tag">₹{{ batch.course.fees }}</dd>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+
+            <div class="col-lg-5">
+                <div class="soft-panel">
+                    <h2 class="h4 mb-3">Apply to this batch</h2>
+
+                    {% if user.is_authenticated %}
+                        {% if enrollment %}
+                        <p class="mb-2">Your application status:</p>
+                        <span class="pill mb-3">{{ enrollment.get_status_display }}</span>
+                        <p class="mb-0">Track everything from your <a href="{% url 'dashboard' %}">dashboard</a>.</p>
+                        {% elif batch.status == 'completed' %}
+                        <p class="mb-0">This batch is completed. Browse other open cohorts.</p>
+                        <a href="{% url 'batch_list' %}" class="btn btn-zs mt-3">View batches</a>
+                        {% else %}
+                        <form method="post">
+                            {% csrf_token %}
+                            <div class="mb-3">
+                                <label class="form-label" for="id_note">Note (optional)</label>
+                                <textarea name="note" id="id_note" rows="3" class="form-control" placeholder="Tell us your goals or preferred timing"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-zs w-100">Submit application</button>
+                        </form>
+                        {% endif %}
+                    {% else %}
+                    <p>Login or create a student account to apply.</p>
+                    <a href="{% url 'login' %}?next={% url 'batch_detail' batch.id %}" class="btn btn-zs me-2">Login</a>
+                    <a href="{% url 'register' %}" class="btn btn-ghost">Register</a>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

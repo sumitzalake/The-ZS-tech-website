@@ -1,42 +1,21 @@
 from django.urls import path
-
-from django.contrib.auth.views import (
-    LoginView,
-    LogoutView
-)
+from django.contrib.auth.views import LoginView, LogoutView
 
 from . import views
+from .forms import StyledAuthenticationForm
 
 
 urlpatterns = [
-
-    path(
-        'register/',
-        views.register,
-        name='register'
-    ),
-
-
+    path('register/', views.register, name='register'),
     path(
         'login/',
         LoginView.as_view(
-            template_name='accounts/login.html'
+            template_name='accounts/login.html',
+            authentication_form=StyledAuthenticationForm,
         ),
-        name='login'
+        name='login',
     ),
-
-
-    path(
-        'logout/',
-        LogoutView.as_view(),
-        name='logout'
-    ),
-
-
-    path(
-        'profile/',
-        views.profile,
-        name='profile'
-    ),
-
+    path('logout/', LogoutView.as_view(), name='logout'),
+    path('profile/', views.profile, name='profile'),
+    path('dashboard/', views.dashboard, name='dashboard'),
 ]

@@ -1,84 +1,52 @@
 {% extends 'base.html' %}
 
-{% block title %}
-My Profile | The ZS-Tech
-{% endblock %}
-
+{% block title %}My Profile | The ZS-Tech{% endblock %}
 
 {% block content %}
-
-<div class="container py-5">
-
-    <div class="row justify-content-center">
-
-        <div class="col-lg-8">
-
-            <div class="card shadow-sm p-4">
-
-                <h2>
-                    My Profile
-                </h2>
-
-                <hr>
-
-
-                <h4>
-
-                    {{ user.first_name }}
-                    {{ user.last_name }}
-
-                </h4>
-
-
-                <p>
-
-                    <strong>
-                        Username:
-                    </strong>
-
-                    {{ user.username }}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Email:
-                    </strong>
-
-                    {{ user.email }}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Mobile:
-                    </strong>
-
-                    {{ user.studentprofile.mobile }}
-
-                </p>
-
-
-                <p>
-
-                    <strong>
-                        Education:
-                    </strong>
-
-                    {{ user.studentprofile.education }}
-
-                </p>
-
-            </div>
-
-        </div>
-
+<section class="page-hero">
+    <div class="container">
+        <h1>Edit profile</h1>
+        <p class="mb-0">Keep your student details, photo, and social links up to date.</p>
     </div>
+</section>
 
-</div>
-
+<section class="pb-5">
+    <div class="container">
+        <div class="row g-4">
+            <div class="col-lg-4">
+                <div class="soft-panel text-center">
+                    <div class="profile-avatar mx-auto mb-3">
+                        {% if profile.profile_photo %}
+                        <img src="{{ profile.profile_photo.url }}" alt="{{ user.get_full_name }}">
+                        {% else %}
+                        {{ user.first_name|default:user.username|make_list|first|upper }}
+                        {% endif %}
+                    </div>
+                    <h2 class="h4 mb-1">{{ user.get_full_name|default:user.username }}</h2>
+                    <p class="mb-0">@{{ user.username }}</p>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="soft-panel">
+                    <form method="post" enctype="multipart/form-data" novalidate>
+                        {% csrf_token %}
+                        <div class="row g-3">
+                            {% for field in form %}
+                            <div class="col-md-6{% if field.name == 'bio' or field.name == 'profile_photo' %} col-md-12{% endif %}">
+                                <label class="form-label" for="{{ field.id_for_label }}">{{ field.label }}</label>
+                                {{ field }}
+                                {% if field.errors %}
+                                <div class="errorlist">{{ field.errors|striptags }}</div>
+                                {% endif %}
+                            </div>
+                            {% endfor %}
+                        </div>
+                        <button type="submit" class="btn btn-zs mt-4">Save changes</button>
+                        <a href="{% url 'dashboard' %}" class="btn btn-ghost mt-4 ms-2">Back to dashboard</a>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 {% endblock %}
