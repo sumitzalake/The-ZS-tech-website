@@ -5,6 +5,7 @@ __pycache__/
 venv/
 env/
 media/
+staticfiles/
 *.log
 .DS_Store
 Thumbs.db

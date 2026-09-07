@@ -12,9 +12,14 @@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
-    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=2">
 </head>
 <body>
+<style>
+    /* Critical fallback so branding still shows if CDN/static cache fails */
+    body { font-family: "Manrope", system-ui, sans-serif; }
+    .hero-brand, h1, h2, h3 { font-family: "Syne", system-ui, sans-serif; }
+</style>
 <header class="site-header">
     <nav class="navbar navbar-expand-lg">
         <div class="container">
