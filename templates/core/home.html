@@ -1,369 +1,102 @@
 {% extends 'base.html' %}
 
-{% block title %}
-The ZS-Tech | Python Full Stack Development
-{% endblock %}
-
+{% block title %}The ZS-Tech | Python Full Stack Software{% endblock %}
 
 {% block content %}
-
-
-<!-- HERO -->
-
 <section class="hero">
-
-    <div class="container">
-
-        <div class="row align-items-center">
-
-            <div class="col-lg-7">
-
-
-                <span class="badge bg-primary mb-3">
-
-                    Python Full Stack Training & Internship
-
-                </span>
-
-
-                <h1>
-
-                    Become a
-                    <span>Job-Ready Python Full Stack Developer</span>
-
-                </h1>
-
-
-                <p class="hero-text">
-
-                    Learn Python, Django, PostgreSQL,
-                    HTML, CSS, Bootstrap and build
-                    real-world projects with
-                    internship and career support.
-
-                </p>
-
-
-                <div class="mt-4">
-
-                    <a
-                        href="{% url 'register' %}"
-                        class="btn btn-primary btn-lg me-2">
-
-                        Join the Program
-
-                    </a>
-
-
-                    <a
-                        href="{% url 'course_list' %}"
-                        class="btn btn-outline-dark btn-lg">
-
-                        View Courses
-
-                    </a>
-
-                </div>
-
-
-            </div>
-
-
-            <div class="col-lg-5 mt-5 mt-lg-0">
-
-
-                <div class="hero-box">
-
-                    <i class="bi bi-laptop"></i>
-
-                    <h3>
-                        Learn → Build → Intern → Get Job Ready
-                    </h3>
-
-                    <p>
-
-                        A complete career-focused
-                        Python Full Stack journey.
-
-                    </p>
-
-                </div>
-
-            </div>
-
+    <div class="container position-relative" style="z-index: 1;">
+        <p class="hero-brand">The ZS-Tech</p>
+        <h1 class="hero-title">Become a job-ready Python Full Stack developer</h1>
+        <p class="hero-text">
+            Learn Python, Django, SQL, and modern frontend — then ship real projects with internship-ready guidance.
+        </p>
+        <div class="hero-actions">
+            <a href="{% url 'register' %}" class="btn btn-primary btn-lg">Start learning</a>
+            <a href="{% url 'course_list' %}" class="btn btn-ghost btn-lg">Browse courses</a>
         </div>
-
     </div>
-
 </section>
-
-
-
-<!-- FEATURES -->
 
 <section class="section">
-
     <div class="container">
-
         <div class="text-center mb-5">
-
-            <h2>
-                Why Choose The ZS-Tech?
-            </h2>
-
-            <p class="text-muted">
-                Learn practical skills for a real development career.
-            </p>
-
+            <h2 class="section-title">Built like software, taught like a career path</h2>
+            <p class="section-lead">One focused journey from fundamentals to deployable full-stack apps.</p>
         </div>
 
-
-        <div class="row g-4">
-
-
-            <div class="col-md-4">
-
-                <div class="feature-card">
-
-                    <i class="bi bi-code-slash"></i>
-
-                    <h4>
-                        Full Stack Training
-                    </h4>
-
-                    <p>
-
-                        Learn frontend,
-                        database and Django backend.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="feature-card">
-
-                    <i class="bi bi-kanban"></i>
-
-                    <h4>
-                        Real-World Projects
-                    </h4>
-
-                    <p>
-
-                        Build practical projects
-                        for your portfolio.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
-            <div class="col-md-4">
-
-                <div class="feature-card">
-
-                    <i class="bi bi-briefcase"></i>
-
-                    <h4>
-                        Internship Experience
-                    </h4>
-
-                    <p>
-
-                        Gain practical internship
-                        experience.
-
-                    </p>
-
-                </div>
-
-            </div>
-
-
+        <div class="feature-row">
+            <article class="feature-block">
+                <div class="icon"><i class="bi bi-layers"></i></div>
+                <h3>Full Stack curriculum</h3>
+                <p>Frontend, databases, and Django backend in a clear, progressive track.</p>
+            </article>
+            <article class="feature-block">
+                <div class="icon"><i class="bi bi-kanban"></i></div>
+                <h3>Real project builds</h3>
+                <p>Portfolio-ready apps you can explain in interviews and internships.</p>
+            </article>
+            <article class="feature-block">
+                <div class="icon"><i class="bi bi-briefcase"></i></div>
+                <h3>Internship readiness</h3>
+                <p>Batch schedules, mentor support, and habits used in real teams.</p>
+            </article>
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- STATISTICS -->
-
-<section class="stats-section">
-
+<section class="stats-band">
     <div class="container">
-
-        <div class="row text-center">
-
-
+        <div class="row g-4 text-center">
             <div class="col-6 col-md">
-
-                <h2>
-                    {{ students }}+
-                </h2>
-
-                <p>
-                    Students Trained
-                </p>
-
+                <h2>{{ students }}+</h2>
+                <p>Students trained</p>
             </div>
-
-
             <div class="col-6 col-md">
-
-                <h2>
-                    {{ batches }}+
-                </h2>
-
-                <p>
-                    Batches Completed
-                </p>
-
+                <h2>{{ batches }}+</h2>
+                <p>Batches completed</p>
             </div>
-
-
             <div class="col-6 col-md">
-
-                <h2>
-                    {{ projects }}+
-                </h2>
-
-                <p>
-                    Projects
-                </p>
-
+                <h2>{{ projects }}+</h2>
+                <p>Projects shipped</p>
             </div>
-
-
             <div class="col-6 col-md">
-
-                <h2>
-                    {{ internships }}+
-                </h2>
-
-                <p>
-                    Internships
-                </p>
-
+                <h2>{{ internships }}+</h2>
+                <p>Internships</p>
             </div>
-
-
             <div class="col-12 col-md">
-
-                <h2>
-                    {{ certificates }}+
-                </h2>
-
-                <p>
-                    Certificates
-                </p>
-
+                <h2>{{ certificates }}+</h2>
+                <p>Certificates</p>
             </div>
-
-
         </div>
-
     </div>
-
 </section>
 
-
-
-<!-- ROADMAP -->
-
-<section class="section bg-light">
-
+<section class="section">
     <div class="container">
-
         <div class="text-center mb-5">
-
-            <h2>
-                Python Full Stack Roadmap
-            </h2>
-
+            <h2 class="section-title">Learning roadmap</h2>
+            <p class="section-lead">A practical path from UI basics to full-stack delivery.</p>
         </div>
 
-
-        <div class="row g-3">
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-filetype-html"></i>
-                    <h5>HTML & CSS</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-bootstrap"></i>
-                    <h5>Bootstrap</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-code"></i>
-                    <h5>Python</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-database"></i>
-                    <h5>SQL / PostgreSQL</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-server"></i>
-                    <h5>Django</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-git"></i>
-                    <h5>Git & GitHub</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-palette"></i>
-                    <h5>Figma / UI UX</h5>
-                </div>
-            </div>
-
-
-            <div class="col-md-3">
-                <div class="roadmap-card">
-                    <i class="bi bi-layers"></i>
-                    <h5>Full Stack Projects</h5>
-                </div>
-            </div>
-
-
+        <div class="roadmap-track">
+            <div class="roadmap-step"><i class="bi bi-filetype-html"></i><h5>HTML &amp; CSS</h5></div>
+            <div class="roadmap-step"><i class="bi bi-bootstrap"></i><h5>Bootstrap</h5></div>
+            <div class="roadmap-step"><i class="bi bi-code-slash"></i><h5>Python</h5></div>
+            <div class="roadmap-step"><i class="bi bi-database"></i><h5>SQL / PostgreSQL</h5></div>
+            <div class="roadmap-step"><i class="bi bi-server"></i><h5>Django</h5></div>
+            <div class="roadmap-step"><i class="bi bi-git"></i><h5>Git &amp; GitHub</h5></div>
+            <div class="roadmap-step"><i class="bi bi-palette"></i><h5>UI / UX</h5></div>
+            <div class="roadmap-step"><i class="bi bi-rocket-takeoff"></i><h5>Capstone projects</h5></div>
         </div>
-
     </div>
-
 </section>
 
-
+<section class="cta-band">
+    <div class="container text-center">
+        <h2 class="mb-3">Ready to join the next batch?</h2>
+        <p class="mb-4 mx-auto" style="max-width: 34rem;">Create your student account, pick a course, and apply to an upcoming batch in minutes.</p>
+        <a href="{% url 'batch_list' %}" class="btn btn-zs btn-lg me-2">View batches</a>
+        <a href="{% url 'contact' %}" class="btn btn-ghost btn-lg">Talk to us</a>
+    </div>
+</section>
 {% endblock %}

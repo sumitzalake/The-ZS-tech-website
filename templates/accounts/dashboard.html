@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+
+{% block title %}Dashboard | The ZS-Tech{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container">
+        <h1>Student dashboard</h1>
+        <p class="mb-0">
+            Hello {{ user.first_name|default:user.username }} — manage applications and your learning profile.
+        </p>
+    </div>
+</section>
+
+<section class="pb-5">
+    <div class="container">
+        <div class="dash-grid">
+            <aside class="soft-panel">
+                <div class="d-flex align-items-center gap-3 mb-3">
+                    <div class="profile-avatar">
+                        {% if profile.profile_photo %}
+                        <img src="{{ profile.profile_photo.url }}" alt="{{ user.get_full_name }}">
+                        {% else %}
+                        {{ user.first_name|default:user.username|make_list|first|upper }}
+                        {% endif %}
+                    </div>
+                    <div>
+                        <h2 class="h5 mb-1">{{ user.get_full_name|default:user.username }}</h2>
+                        <p class="mb-0 small">{{ user.email }}</p>
+                    </div>
+                </div>
+                <dl class="info-list mb-4">
+                    <dt>Mobile</dt>
+                    <dd>{{ profile.mobile|default:"—" }}</dd>
+                    <dt>Education</dt>
+                    <dd>{{ profile.education|default:"—" }}</dd>
+                </dl>
+                <a href="{% url 'profile' %}" class="btn btn-zs w-100 mb-2">Edit profile</a>
+                <a href="{% url 'batch_list' %}" class="btn btn-ghost w-100">Browse batches</a>
+            </aside>
+
+            <div class="soft-panel">
+                <h2 class="h4 mb-3">My batch applications</h2>
+
+                {% for item in enrollments %}
+                <div class="enroll-card">
+                    <div>
+                        <h3 class="h6 mb-1">{{ item.batch.name }}</h3>
+                        <p class="mb-1 small">{{ item.batch.course.title }} · {{ item.batch.schedule }}</p>
+                        <a href="{% url 'batch_detail' item.batch.id %}" class="small">View batch</a>
+                    </div>
+                    <span class="pill{% if item.status == 'rejected' %} pill-muted{% elif item.status == 'approved' %}{% else %} pill-warn{% endif %}">
+                        {{ item.get_status_display }}
+                    </span>
+                </div>
+                {% empty %}
+                <div class="empty-state px-0">
+                    <h3 class="h5">No applications yet</h3>
+                    <p>Apply to an upcoming batch to see status updates here.</p>
+                    <a href="{% url 'batch_list' %}" class="btn btn-zs">Find a batch</a>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
