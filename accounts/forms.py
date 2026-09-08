@@ -66,11 +66,10 @@ class RegistrationForm(UserCreationForm):
 
         if commit:
             user.save()
-            StudentProfile.objects.create(
-                user=user,
-                mobile=self.cleaned_data['mobile'],
-                education=self.cleaned_data['education'],
-            )
+            profile, _ = StudentProfile.objects.get_or_create(user=user)
+            profile.mobile = self.cleaned_data['mobile']
+            profile.education = self.cleaned_data['education']
+            profile.save()
 
         return user
 

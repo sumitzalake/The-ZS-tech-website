@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, ProfileUpdateForm
+from .utils import get_or_create_student_profile
 from batches.models import Enrollment
 
 
@@ -26,7 +27,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    profile_obj = request.user.studentprofile
+    profile_obj = get_or_create_student_profile(request.user)
 
     if request.method == 'POST':
         form = ProfileUpdateForm(
@@ -64,6 +65,6 @@ def dashboard(request):
         'accounts/dashboard.html',
         {
             'enrollments': enrollments,
-            'profile': request.user.studentprofile,
+            'profile': get_or_create_student_profile(request.user),
         },
     )
