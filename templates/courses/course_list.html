@@ -4,9 +4,16 @@
 
 {% block content %}
 <section class="page-hero">
-    <div class="container text-center">
-        <h1>Courses</h1>
-        <p class="section-lead">Structured programs designed like real software products — clear modules, outcomes, and fees.</p>
+    <div class="container">
+        <div class="page-toolbar">
+            <div>
+                <h1>Courses</h1>
+                <p class="section-lead mb-0">Structured programs designed like real software products — clear modules, outcomes, and fees.</p>
+            </div>
+            {% if perms.courses.add_course %}
+            <a href="{% url 'course_create' %}" class="btn btn-zs">Add course</a>
+            {% endif %}
+        </div>
     </div>
 </section>
 
@@ -30,7 +37,12 @@
             <div class="col-12">
                 <div class="empty-state soft-panel">
                     <h3>No courses yet</h3>
-                    <p>Add courses from Django Admin to get started.</p>
+                    {% if perms.courses.add_course %}
+                    <p>Add the first course to get started.</p>
+                    <a href="{% url 'course_create' %}" class="btn btn-zs">Add course</a>
+                    {% else %}
+                    <p>New programs will appear here when they are published.</p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

@@ -12,6 +12,12 @@ urlpatterns = [
     ),
 
     path(
+        'add/',
+        views.batch_create,
+        name='batch_create'
+    ),
+
+    path(
         '<int:pk>/',
         views.batch_detail,
         name='batch_detail'

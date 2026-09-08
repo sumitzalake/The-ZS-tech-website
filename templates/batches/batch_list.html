@@ -4,9 +4,16 @@
 
 {% block content %}
 <section class="page-hero">
-    <div class="container text-center">
-        <h1>Training batches</h1>
-        <p class="section-lead">Pick a live schedule, review details, and apply from your student account.</p>
+    <div class="container">
+        <div class="page-toolbar">
+            <div>
+                <h1>Training batches</h1>
+                <p class="section-lead mb-0">Pick a live schedule, review details, and apply from your student account.</p>
+            </div>
+            {% if perms.batches.add_batch %}
+            <a href="{% url 'batch_create' %}" class="btn btn-zs">Create batch</a>
+            {% endif %}
+        </div>
     </div>
 </section>
 
@@ -42,7 +49,12 @@
             <div class="col-12">
                 <div class="empty-state soft-panel">
                     <h3>No batches listed</h3>
+                    {% if perms.batches.add_batch %}
+                    <p>Create the first cohort so students can apply.</p>
+                    <a href="{% url 'batch_create' %}" class="btn btn-zs">Create batch</a>
+                    {% else %}
                     <p>New cohorts will show up here when published.</p>
+                    {% endif %}
                 </div>
             </div>
             {% endfor %}

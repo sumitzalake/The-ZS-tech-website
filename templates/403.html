@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Permission needed | The ZS-Tech{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+    <div class="container text-center">
+        <h1>You do not have access</h1>
+        <p class="section-lead">This action is only available to users with the assigned permission.</p>
+        <a href="{% url 'home' %}" class="btn btn-zs mt-2">Back to home</a>
+    </div>
+</section>
+{% endblock %}

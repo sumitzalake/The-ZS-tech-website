@@ -1,7 +1,8 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.decorators import login_required, permission_required
 from django.contrib import messages
 
+from .forms import BatchForm
 from .models import Batch, Enrollment
 
 
@@ -45,5 +46,26 @@ def batch_detail(request, pk):
         {
             'batch': batch,
             'enrollment': enrollment,
+        },
+    )
+
+
+@login_required
+@permission_required('batches.add_batch', raise_exception=True)
+def batch_create(request):
+    if request.method == 'POST':
+        form = BatchForm(request.POST)
+        if form.is_valid():
+            batch = form.save()
+            messages.success(request, f'{batch.name} has been created.')
+            return redirect('batch_detail', pk=batch.pk)
+    else:
+        form = BatchForm()
+
+    return render(
+        request,
+        'batches/batch_form.html',
+        {
+            'form': form,
         },
     )

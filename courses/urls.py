@@ -12,6 +12,12 @@ urlpatterns = [
     ),
 
     path(
+        'add/',
+        views.course_create,
+        name='course_create'
+    ),
+
+    path(
         '<int:pk>/',
         views.course_detail,
         name='course_detail'

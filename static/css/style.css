@@ -313,6 +313,26 @@ p {
     margin-bottom: 0.5rem;
 }
 
+.page-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 1rem 1.5rem;
+}
+
+.page-toolbar .section-lead {
+    margin-left: 0;
+}
+
+.form-panel {
+    max-width: 52rem;
+}
+
+.form-panel:hover {
+    transform: none;
+}
+
 .feature-row {
     display: grid;
     gap: 1.5rem;
