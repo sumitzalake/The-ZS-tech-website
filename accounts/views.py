@@ -4,7 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 
 from .forms import RegistrationForm, ProfileUpdateForm
-from .models import StudentProfile
+from .utils import get_or_create_student_profile
 from batches.models import Enrollment
 
 
@@ -27,7 +27,7 @@ def register(request):
 
 @login_required
 def profile(request):
-    profile_obj, _ = StudentProfile.objects.get_or_create(user=request.user)
+    profile_obj = get_or_create_student_profile(request.user)
 
     if request.method == 'POST':
         form = ProfileUpdateForm(
@@ -60,12 +60,11 @@ def dashboard(request):
         .filter(user=request.user)
         .select_related('batch', 'batch__course')
     )
-    profile, _ = StudentProfile.objects.get_or_create(user=request.user)
     return render(
         request,
         'accounts/dashboard.html',
         {
             'enrollments': enrollments,
-            'profile': profile,
+            'profile': get_or_create_student_profile(request.user),
         },
     )
